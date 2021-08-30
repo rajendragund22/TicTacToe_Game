@@ -34,15 +34,20 @@ public class TicTacToeGame {
                 flag = checkTie();
                 if (flag == 1) {
                     System.out.println("Nice Play! It's Tie");
-                    ;
+
                     break outerloop;
                 }
                 turn++;
             } else {
-                // To check whether computer is winning or not
                 flag = computerWin();
                 if (flag == 1)
                     break outerloop;
+                flag = computerBlock();
+                if (flag == 1) {
+                    turn++;
+                    flag = 0;
+                    return;
+                }
             }
         }
     }
@@ -214,5 +219,16 @@ public class TicTacToeGame {
         }
         return flag;
     }
+    private static int computerBlock() {
+        int index = winBlock(userMark, computerMark);
+        if (index != 0) {
+            element[index] = computerMark;
+            System.out.println("Computer goes for '" + index + "' to block User");
+            flag = 1;
+        }
+        return flag;
+    }
+
 }
+
 
